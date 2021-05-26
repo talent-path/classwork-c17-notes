@@ -16,7 +16,10 @@ namespace GroupByExercise
 
             var groupedPeopleByCity = GroupByCity(allPeople);
 
-
+            foreach( City homeCity in groupedPeopleByCity.Keys)
+            {
+                Console.WriteLine( homeCity + " contains " + groupedPeopleByCity[homeCity].Count + " people."  );
+            }
 
         }
 
