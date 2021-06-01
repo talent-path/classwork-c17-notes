@@ -27,6 +27,22 @@ namespace WidgetCrud
             throw new NotImplementedException();
         }
 
-        public Widget GetWidgetById( )
+        public Widget GetWidgetById( int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Widget> GetWidgetsByCategory( string category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Widget> GetAllWidgetsForPage( int pageSize, int pageNumber)
+        {
+            //assuming each page is pageSize wide, return the pageNumberth page of widgets
+            //order by name?
+
+            throw new NotImplementedException();
+        }
     }
 }
