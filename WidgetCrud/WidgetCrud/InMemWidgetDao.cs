@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WidgetCrud
 {
     public class InMemWidgetDao
     {
-        List<Widget> _allWidgets = new List<Widget>();
+        IEnumerable<Widget> _allWidgets = new List<Widget>();
 
         public InMemWidgetDao()
         {
@@ -14,27 +15,32 @@ namespace WidgetCrud
 
         public int AddWidget( Widget toAdd)
         {
-            throw new NotImplementedException();
+            //todo: add null checks
+
+            toAdd.Id = _allWidgets.Max(w => w.Id) + 1;
+            _allWidgets = _allWidgets.Concat(new Widget[] { new Widget(toAdd) });
+            return toAdd.Id;
         }
 
         public void RemoveWidgetById( int id)
         {
-            throw new NotImplementedException();
+            _allWidgets = _allWidgets.Where(w => w.Id != id);
         }
 
         public void UpdateWidget( Widget updated)
         {
-            throw new NotImplementedException();
+            _allWidgets = _allWidgets.Select(
+                w => w.Id == updated.Id ? new Widget(updated) : w);
         }
 
         public Widget GetWidgetById( int id)
         {
-            throw new NotImplementedException();
+            return _allWidgets.SingleOrDefault(w => w.Id == id);
         }
 
         public IEnumerable<Widget> GetWidgetsByCategory( string category)
         {
-            throw new NotImplementedException();
+            return _allWidgets.Where(w => w.Category == category);
         }
 
         public IEnumerable<Widget> GetAllWidgetsForPage( int pageSize, int pageNumber)
@@ -42,7 +48,10 @@ namespace WidgetCrud
             //assuming each page is pageSize wide, return the pageNumberth page of widgets
             //order by name?
 
-            throw new NotImplementedException();
+            return _allWidgets
+                .OrderBy(w => w.Id)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize);
         }
     }
 }

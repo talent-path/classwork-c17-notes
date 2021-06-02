@@ -43,6 +43,26 @@ namespace WidgetCrud
             }
         }
 
+        private static void GetWidgetsByPage()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void GetWidgetsByCat()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void GetWidgetById()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void EditWidget()
+        {
+            throw new NotImplementedException();
+        }
+
         private static void RemoveWidgetById()
         {
             throw new NotImplementedException();
