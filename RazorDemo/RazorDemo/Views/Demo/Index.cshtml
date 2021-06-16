@@ -1,0 +1,9 @@
+﻿@model IEnumerable<FakeModel>
+
+@{
+}
+
+@foreach( var fm in Model)
+{
+    <p><a href="~/Demo/FirstView/@fm.Id">@fm.Name</a></p>
+}
