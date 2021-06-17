@@ -9,9 +9,29 @@ namespace CourseManager.Repos
     {
         static List<Teacher> _allTeachers = new List<Teacher>
         {
-            new Teacher{ Id = 1, Name = "David" },
-            new Teacher{ Id = 2, Name = "Bob" },
-            new Teacher{ Id = 3, Name = "Alice"}
+            new Teacher{
+                Id = 1,
+                Name = "David",
+                Courses = new List<Course>
+                {
+                    new Course { Id = 1, Name = "C#" }
+                }
+            },
+            new Teacher{
+                Id = 2,
+                Name = "Bob",
+                Courses = new List<Course>
+                {
+                    new Course { Id = 2, Name = "Java" }
+                } },
+            new Teacher{
+                Id = 3,
+                Name = "Alice",
+                Courses = new List<Course>
+                {
+                    new Course { Id = 1, Name = "Python" }
+                }
+            }
         };
 
         public InMemTeacherRepo()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CourseManager.Exceptions;
 using CourseManager.Models;
 using CourseManager.Repos;
@@ -55,6 +56,29 @@ namespace CourseManager.Services
         public void EditCourse(Course toEdit)
         {
             _courseRepo.Edit(toEdit);
+
+            //may need to fix all students and teachers
+            //because of stupid in-mem relationships
+
+            List<Course> allCourses = _courseRepo.GetAll();
+            List<Student> allStudents = _studentRepo.GetAll();
+            List<Teacher> allTeachers = _teacherRepo.GetAll();
+
+            foreach( Student anyStudent in allStudents)
+            {
+                anyStudent.Courses =
+                    allCourses.Where(
+                        course => course.ClassStudents.Any(
+                            classStudent => classStudent.Id == anyStudent.Id)).ToList();
+
+
+            }
+            foreach( var anyTeacher in allTeachers)
+            {
+                anyTeacher.Courses = allCourses
+                    .Where(course => course.ClassTeacher.Id == anyTeacher.Id)
+                    .ToList();
+            }
         }
 
         public Student GetStudentById(int id)
